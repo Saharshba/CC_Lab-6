@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f nginx-lb || true
+                    docker ps -q --filter "publish=80" | xargs -r docker rm -f
                     sleep 2
                     docker run -d \
                         --name nginx-lb \
